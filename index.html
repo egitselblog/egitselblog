@@ -49,6 +49,24 @@
         .animate-slide-in {
             animation: slideInRight 1s ease-out forwards;
         }
+        /* Tailwind'in form-radio stilini simüle etmek için CSS */
+        .form-radio {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            display: inline-block;
+            vertical-align: middle;
+            background-color: #fff;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            cursor: pointer;
+            transition: border 0.1s ease-in-out, background-color 0.1s ease-in-out;
+        }
+        .form-radio:checked {
+            background-color: #06b6d4; /* cyan-500 */
+            border-color: #06b6d4;
+            box-shadow: inset 0 0 0 4px #fff;
+        }
     </style>
 </head>
 <body class="text-gray-800 antialiased">
@@ -90,11 +108,8 @@
 
             <!-- Sağ: Görsel Alanı (Placeholder) --><div class="md:w-1/2 flex justify-center animate-slide-in">
                 <!-- Öğretmenin sade bir profil fotoğrafı için yer tutucu -->
-                <div class="w-64 h-64 md:w-80 md:h-80 bg-cyan-100 rounded-full flex items-center justify-center shadow-2xl shadow-cyan-200 border-8 border-white">
-                    <svg class="w-24 h-24 text-cyan-600/70" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="absolute text-xl font-bold text-cyan-700 mt-28">Hümeyra Öğretmen</span>
+               <div class="w-64 h-64 md:w-80 md:h-80 rounded-full flex items-center justify-center shadow-2xl shadow-cyan-200 border-8 border-white overflow-hidden">
+                    <img src="humeyrapesin.png" alt="Hümeyra Peşin" class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
@@ -121,6 +136,7 @@
                         <li class="flex items-center"><span class="text-cyan-500 mr-2">✓</span> Oran-Orantı ve Yüzdeler</li>
                         <li class="flex items-center"><span class="text-cyan-500 mr-2">✓</span> Geometri Temelleri</li>
                     </ul>
+                    <p class="mt-3 text-sm font-semibold text-cyan-600">ve daha fazlası...</p>
                 </div>
 
                 <!-- Lise (High School) Kartı --><div class="bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-shadow duration-300 border-4 pastel-border">
@@ -137,6 +153,7 @@
                         <li class="flex items-center"><span class="text-cyan-500 mr-2">✓</span> Trigonometri & Logaritma</li>
                         <li class="flex items-center"><span class="text-cyan-500 mr-2">✓</span> AYT/TYT Hazırlık Kampları</li>
                     </ul>
+                    <p class="mt-3 text-sm font-semibold text-cyan-600">ve daha fazlası...</p>
                 </div>
 
             </div>
@@ -210,10 +227,8 @@
             <div class="flex flex-col md:flex-row items-center justify-between">
                 <div class="md:w-1/3 mb-8 md:mb-0 flex justify-center">
                     <!-- Hakkımda Bölümü Görsel Alanı (Hesap Makinesi İkonu) -->
-                    <div class="w-48 h-48 bg-cyan-500 rounded-2xl flex items-center justify-center p-4 shadow-xl">
-                        <svg class="w-32 h-32 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 5h6m-6 5h6M3 7h1m0 5h1m0 5h1M9 19V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                        </svg>
+                    <div class="w-48 h-48 rounded-2xl flex items-center justify-center p-4 shadow-xl overflow-hidden">
+                            <img src="humeyrapesin.png" alt="Kutudaki görselin açıklaması" class="w-full h-full object-cover">
                     </div>
                 </div>
                 <div class="md:w-2/3 md:pl-12 text-center md:text-left">
@@ -225,7 +240,7 @@
                         "Eğitselblog markası altında, her öğrencinin kendi öğrenme hızına ve stiline uygun, baskıdan uzak bir ortam sunuyorum. Amacım, ezberden uzak, kalıcı öğrenmeyi sağlamak ve öğrencilerin 'yapamam' bariyerini kırmak."
                     </p>
                     <ul class="mt-6 space-y-2 text-gray-700 font-medium">
-                        <li class="flex items-center justify-center md:justify-start"><span class="text-cyan-500 mr-3">✔</span> 10+ Yıl Özel Ders Deneyimi</li>
+                        <li class="flex items-center justify-center md:justify-start"><span class="text-cyan-500 mr-3">✔</span> 5+ Yıl Özel Ders Deneyimi</li>
                         <li class="flex items-center justify-center md:justify-start"><span class="text-cyan-500 mr-3">✔</span> Başarı Odaklı, Sade Metotlar</li>
                         <li class="flex items-center justify-center md:justify-start"><span class="text-cyan-500 mr-3">✔</span> Pedagojik Formasyon Eğitimi</li>
                     </ul>
@@ -244,6 +259,23 @@
                     <input type="text" id="name" placeholder="Adınız Soyadınız" class="w-full p-3 rounded-lg border pastel-border focus:ring-cyan-500 focus:border-cyan-500 transition-colors" required>
                     <input type="email" id="email" placeholder="E-posta Adresiniz" class="w-full p-3 rounded-lg border pastel-border focus:ring-cyan-500 focus:border-cyan-500 transition-colors" required>
                     <input type="tel" id="phone" placeholder="Telefon Numaranız" class="w-full p-3 rounded-lg border pastel-border focus:ring-cyan-500 focus:border-cyan-500 transition-colors">
+                    
+                    <!-- Ders Tipi Seçimi -->
+                    <div class="pt-2 flex flex-col sm:flex-row justify-center sm:justify-start space-y-2 sm:space-y-0 sm:space-x-8 text-left">
+                        <span class="text-gray-700 font-semibold text-sm mr-4 block sm:hidden">Ders Tipi Seçimi:</span>
+                        <div class="flex space-x-4">
+                             <label class="flex items-center text-gray-700 text-sm font-medium">
+                                <input type="radio" name="lesson_type" value="Online" class="form-radio text-cyan-500 h-4 w-4" required>
+                                <span class="ml-2">Online Ders</span>
+                            </label>
+                            <label class="flex items-center text-gray-700 text-sm font-medium">
+                                <input type="radio" name="lesson_type" value="Yüzyüze" class="form-radio text-cyan-500 h-4 w-4" required>
+                                <span class="ml-2">Yüzyüze Ders</span>
+                            </label>
+                        </div>
+                    </div>
+                    <!-- Ders Tipi Seçimi Bitişi -->
+
                     <textarea id="message" placeholder="Mesajınız (Hangi sınıf ve dersle ilgili?)" rows="4" class="w-full p-3 rounded-lg border pastel-border focus:ring-cyan-500 focus:border-cyan-500 transition-colors" required></textarea>
                     <button type="submit" id="submitButton" class="w-full px-4 py-3 bg-cyan-600 text-white font-semibold rounded-lg shadow-md hover:bg-cyan-700 transition-colors">
                         Mesaj Gönder
@@ -255,8 +287,7 @@
             </div>
             
             <p class="mt-8 text-gray-500">
-                <span class="font-semibold">Telefon:</span> 0 (5XX) XXX XX XX | 
-                <span class="font-semibold">E-posta:</span> iletisim@egitselblog.com
+                <span class="font-semibold">E-posta:</span> egitselblog@gmail.com
             </p>
         </div>
     </section>
@@ -294,11 +325,15 @@
             messageStatus.classList.add('hidden');
             messageStatus.classList.remove('bg-green-100', 'text-green-700', 'bg-red-100', 'text-red-700');
 
+            // Ders tipini yakala
+            const selectedLessonType = form.querySelector('input[name="lesson_type"]:checked')?.value || 'Belirtilmedi';
+
             // Form verilerini toplama
             const data = {
                 name: form.querySelector('#name').value,
                 email: form.querySelector('#email').value,
                 phone: form.querySelector('#phone').value || null, // Telefon alanı boş bırakılabilir
+                lesson_type: selectedLessonType, // YENİ: Ders tipi eklendi
                 message: form.querySelector('#message').value,
             };
 
