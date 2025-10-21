@@ -305,7 +305,7 @@
             try {
                 // Veriyi Supabase'e ekle
                 const { error } = await supabase
-                    .from('egitselblogsconver') // Bu tablo adını Supabase'de oluşturmanız gerekir.
+                    .from('egitselblogcontac') // Tablo adı, görselde görünen isme göre güncellendi.
                     .insert([data]);
 
                 if (error) {
@@ -378,4 +378,3 @@
 
 </body>
 </html>
-
