@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hümeyra Peşin | Eğitselblog</title>
     <!-- Tailwind CSS Yükleniyor --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Supabase Kütüphanesi Eklendi --><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Inter Font Yükleniyor --><link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <style>
         /* Genel fontu Inter olarak ayarla */
@@ -89,9 +90,12 @@
 
             <!-- Sağ: Görsel Alanı (Placeholder) --><div class="md:w-1/2 flex justify-center animate-slide-in">
                 <!-- Öğretmenin sade bir profil fotoğrafı için yer tutucu -->
-                <div class="w-64 h-64 md:w-80 md:h-80 rounded-full flex items-center justify-center shadow-2xl shadow-cyan-200 border-8 border-white overflow-hidden">
-    <img src="humeyrapesin.png" alt="Hümeyra Peşin" class="w-full h-full object-cover">
-</div>
+                <div class="w-64 h-64 md:w-80 md:h-80 bg-cyan-100 rounded-full flex items-center justify-center shadow-2xl shadow-cyan-200 border-8 border-white">
+                    <svg class="w-24 h-24 text-cyan-600/70" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="absolute text-xl font-bold text-cyan-700 mt-28">Hümeyra Öğretmen</span>
+                </div>
             </div>
         </div>
     </section>
@@ -205,10 +209,12 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center justify-between">
                 <div class="md:w-1/3 mb-8 md:mb-0 flex justify-center">
-                    <!-- Başka bir sade görsel yer tutucu -->
-                     <div class="w-48 h-48 rounded-2xl flex items-center justify-center p-4 shadow-xl overflow-hidden">
-    <img src="humeyrapesin2.png" alt="Kutudaki görselin açıklaması" class="w-full h-full object-cover">
-</div>
+                    <!-- Hakkımda Bölümü Görsel Alanı (Hesap Makinesi İkonu) -->
+                    <div class="w-48 h-48 bg-cyan-500 rounded-2xl flex items-center justify-center p-4 shadow-xl">
+                        <svg class="w-32 h-32 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 5h6m-6 5h6M3 7h1m0 5h1m0 5h1M9 19V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
                 </div>
                 <div class="md:w-2/3 md:pl-12 text-center md:text-left">
                     <h3 class="text-4xl font-bold mb-4 pastel-text">Hümeyra Öğretmen Kimdir?</h3>
@@ -234,16 +240,16 @@
             <p class="text-lg text-gray-500 mb-12">Dersler hakkında bilgi almak veya deneme dersi planlamak için formu doldurun.</p>
 
             <div class="max-w-xl mx-auto p-8 pastel-accent rounded-2xl shadow-2xl">
-                <form class="space-y-4">
-                    <input type="text" placeholder="Adınız Soyadınız" class="w-full p-3 rounded-lg border pastel-border focus:ring-cyan-500 focus:border-cyan-500 transition-colors" required>
-                    <input type="email" placeholder="E-posta Adresiniz" class="w-full p-3 rounded-lg border pastel-border focus:ring-cyan-500 focus:border-cyan-500 transition-colors" required>
-                    <input type="tel" placeholder="Telefon Numaranız" class="w-full p-3 rounded-lg border pastel-border focus:ring-cyan-500 focus:border-cyan-500 transition-colors">
-                    <textarea placeholder="Mesajınız (Hangi sınıf ve dersle ilgili?)" rows="4" class="w-full p-3 rounded-lg border pastel-border focus:ring-cyan-500 focus:border-cyan-500 transition-colors" required></textarea>
-                    <button type="submit" class="w-full px-4 py-3 bg-cyan-600 text-white font-semibold rounded-lg shadow-md hover:bg-cyan-700 transition-colors">
+                <form id="contactForm" class="space-y-4">
+                    <input type="text" id="name" placeholder="Adınız Soyadınız" class="w-full p-3 rounded-lg border pastel-border focus:ring-cyan-500 focus:border-cyan-500 transition-colors" required>
+                    <input type="email" id="email" placeholder="E-posta Adresiniz" class="w-full p-3 rounded-lg border pastel-border focus:ring-cyan-500 focus:border-cyan-500 transition-colors" required>
+                    <input type="tel" id="phone" placeholder="Telefon Numaranız" class="w-full p-3 rounded-lg border pastel-border focus:ring-cyan-500 focus:border-cyan-500 transition-colors">
+                    <textarea id="message" placeholder="Mesajınız (Hangi sınıf ve dersle ilgili?)" rows="4" class="w-full p-3 rounded-lg border pastel-border focus:ring-cyan-500 focus:border-cyan-500 transition-colors" required></textarea>
+                    <button type="submit" id="submitButton" class="w-full px-4 py-3 bg-cyan-600 text-white font-semibold rounded-lg shadow-md hover:bg-cyan-700 transition-colors">
                         Mesaj Gönder
                     </button>
-                    <!-- Form gönderme başarısını gösterecek basit bir mesaj kutusu --><div id="message-status" class="hidden mt-4 p-3 rounded-lg bg-green-100 text-green-700 font-medium">
-                        Mesajınız başarıyla gönderildi! Hümeyra Öğretmen en kısa sürede size dönüş yapacaktır.
+                    <!-- Form gönderme başarısını gösterecek basit bir mesaj kutusu --><div id="message-status" class="hidden mt-4 p-3 rounded-lg font-medium">
+                        <!-- Durum mesajı buraya eklenecek -->
                     </div>
                 </form>
             </div>
@@ -262,76 +268,108 @@
         </div>
     </footer>
 
-    <!-- JavaScript for Form Submission (Simulated) and Counter Animation --><script>
-        // Form Gönderim Simülasyonu
-        document.querySelector('form').addEventListener('submit', function(e) {
+    <!-- JavaScript for Supabase Integration, Counter Animation --><script>
+        // Supabase Ayarları
+        const SUPABASE_URL = 'https://zsekjzvevzhjjygovhtn.supabase.co'; 
+        // Anon Anahtar, kullanıcı tarafından sağlanan API anahtarıyla güncellendi.
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpzZWtqenZldnpoamp5Z292aHRuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA5NTM5MTAsImV4cCI6MjA3NjUyOTkxMH0.OcB3dcxf1GQSKgDSjUVW2o1lCUAkBM_kQnPlpoS730o'; 
+        
+        // Supabase İstemcisini Başlat
+        const { createClient } = window.supabase;
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Supabase ile Form Gönderme Fonksiyonu
+        async function submitForm(e) {
             e.preventDefault();
-            
+
+            // Tüm anahtarlar ayarlandığı için placeholder kontrolü kaldırıldı.
+
             const form = e.target;
             const messageStatus = document.getElementById('message-status');
+            const submitButton = document.getElementById('submitButton');
 
-            // Basit bir simülasyon: Formu temizle ve başarı mesajı göster
-            setTimeout(() => {
-                form.reset();
+            // Durum ve buton güncellemesi
+            submitButton.disabled = true;
+            submitButton.textContent = 'Gönderiliyor...';
+            messageStatus.classList.add('hidden');
+            messageStatus.classList.remove('bg-green-100', 'text-green-700', 'bg-red-100', 'text-red-700');
+
+            // Form verilerini toplama
+            const data = {
+                name: form.querySelector('#name').value,
+                email: form.querySelector('#email').value,
+                phone: form.querySelector('#phone').value || null, // Telefon alanı boş bırakılabilir
+                message: form.querySelector('#message').value,
+            };
+
+            try {
+                // Veriyi Supabase'e ekle
+                const { error } = await supabase
+                    .from('contact_messages') // Bu tablo adını Supabase'de oluşturmanız gerekir.
+                    .insert([data]);
+
+                if (error) {
+                    console.error('Supabase Ekleme Hatası:', error);
+                    messageStatus.textContent = 'Hata oluştu! Mesajınız gönderilemedi. Hata: ' + error.message;
+                    messageStatus.classList.add('bg-red-100', 'text-red-700');
+                } else {
+                    messageStatus.textContent = 'Mesajınız başarıyla gönderildi! Hümeyra Öğretmen en kısa sürede size dönüş yapacaktır.';
+                    messageStatus.classList.add('bg-green-100', 'text-green-700');
+                    form.reset();
+                }
+            } catch (err) {
+                console.error('Form Gönderim Hatası:', err);
+                messageStatus.textContent = 'Bir bağlantı hatası oluştu. Lütfen daha sonra tekrar deneyin.';
+                messageStatus.classList.add('bg-red-100', 'text-red-700');
+            } finally {
+                // Son işlemleri yap
+                submitButton.disabled = false;
+                submitButton.textContent = 'Mesaj Gönder';
                 messageStatus.classList.remove('hidden');
-                
-                // 5 saniye sonra mesajı gizle
-                setTimeout(() => {
-                    messageStatus.classList.add('hidden');
-                }, 5000);
+            }
+        }
 
-            }, 500); // 500ms gecikme ile gönderim hissi ver
-        });
+        // Form dinleyicisini Supabase fonksiyonuna bağla
+        document.getElementById('contactForm').addEventListener('submit', submitForm);
+
 
         // Sayaç Animasyonu: Intersection Observer kullanılarak görünür olduğunda tetiklenir.
         const counterSection = document.getElementById('basarilar');
         const counters = document.querySelectorAll('.counter');
         const speed = 200; // Sayacın bitiş hızı (artış hızı)
         
-        // Bu fonksiyon sayaç animasyonunu başlatır
         const startCounting = () => {
             counters.forEach(counter => {
-                // Her counter için ayrı bir animasyon döngüsü
                 const updateCount = () => {
                     const target = +counter.getAttribute('data-target');
                     const count = +counter.innerText;
                     
-                    // Artış miktarı
                     const increment = target / speed;
 
                     if (count < target) {
-                        // Sayıyı yukarı yuvarla ve metni güncelle
                         counter.innerText = Math.ceil(count + increment);
-                        // Bir sonraki karede tekrar çalıştır
                         requestAnimationFrame(updateCount);
                     } else {
-                        // Hedefe ulaşıldı
                         counter.innerText = target;
                     }
                 };
-                
-                // Animasyonu başlat
                 updateCount();
             });
         };
 
-        // Intersection Observer oluşturuluyor
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Bölüm görünür alana girdiğinde: sayaçları sıfırla ve animasyonu başlat
                     counters.forEach(counter => counter.innerText = '0');
                     startCounting();
                 } else {
-                    // Bölüm görünür alandan çıktığında: sayaçları sıfırla
                     counters.forEach(counter => counter.innerText = '0');
                 }
             });
         }, {
-            threshold: 0.5 // Bölümün %50'si görünür olduğunda tetikle
+            threshold: 0.5
         });
 
-        // Başarılar bölümünü gözlemlemeye başla
         if (counterSection) {
             observer.observe(counterSection);
         }
@@ -340,10 +378,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
